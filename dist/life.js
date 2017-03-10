@@ -53,9 +53,6 @@ var Life = (function () {
         stat = _Object$assign.stat,
         seed = _Object$assign.seed;
 
-    // Store ruleset
-
-
     var code = parseRule(rule);
 
     // Calculate state
