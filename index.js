@@ -105,6 +105,8 @@ var mooreEnds = function mooreEnds(s) {
 };
 
 var Life = function Life(opts) {
+  var area = { size: opts.size * opts.size };
+
   var data = Object.assign({
     ends: mooreEnds(opts.size),
     seed: function seed() {
@@ -123,9 +125,7 @@ var Life = function Life(opts) {
 
       return v;
     }
-  }, opts, {
-    size: opts.size * opts.size
-  });
+  }, opts, area);
 
   return Otto(data);
 };

@@ -7,6 +7,8 @@ const mySum = (a, b) => a + b;
 const mooreEnds = s => [-1, 1, -s, s, -1 - s, 1 - s, -1 + s, 1 + s];
 
 const Life = (opts) => {
+  const area = { size: opts.size * opts.size };
+
   const data = Object.assign({
     ends: mooreEnds(opts.size),
     seed: () => Math.floor(Math.random() * 2) % 2,
@@ -23,9 +25,7 @@ const Life = (opts) => {
 
       return v;
     },
-  }, opts, {
-    size: opts.size * opts.size,
-  });
+  }, opts, area);
 
   return Otto(data);
 };
