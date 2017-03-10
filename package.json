@@ -1,0 +1,69 @@
+{
+  "name": "@thewhodidthis/life",
+  "version": "0.0.0",
+  "description": "Otto life",
+  "keywords": [
+    "automata",
+    "canvas",
+    "cellular"
+  ],
+  "main": "index.js",
+  "module": "index.es",
+  "homepage": "https://github.com/thewhodidthis/life#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thewhodidthis/life.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thewhodidthis/life/issues"
+  },
+  "directories": {
+    "example": "example"
+  },
+  "config": {
+    "remote": "thewhodidthis@zazie:www/example/otto/life"
+  },
+  "scripts": {
+    "pretest": "rollup -c",
+    "test": "node test",
+    "clear": "npm run clear:dist && npm run clear:logs",
+    "clear:dist": "rm -rf dist/",
+    "clear:docs": "rm -rf docs/",
+    "clear:logs": "rm -f *.log",
+    "lint": "eslint index.es; exit 0",
+    "start": "npm run clear && npm run build",
+    "docs": "docco -l ivory -e .js index.es",
+    "preexample": "npm start",
+    "example": "npm run example:link && npm run example:serve",
+    "example:link": "ln -siv \"$(pwd)/dist/life.min.js\" example/life.js",
+    "example:push": "rsync -avruzLPC --exclude=.DS_Store ./example/ $npm_package_config_remote",
+    "example:serve": "php -S localhost:8000 -t example/",
+    "prebuild": "mkdir -p dist/",
+    "build": "rollup -c",
+    "build:min": "uglifyjs dist/life.js -cm > dist/life.min.js",
+    "postbuild": "npm run build:min",
+    "preversion": "npm start"
+  },
+  "engines": {
+    "node": ">=4.2.4",
+    "npm": ">=3.5.3"
+  },
+  "dependencies": {
+    "@thewhodidthis/otto": "github:thewhodidthis/otto"
+  },
+  "devDependencies": {
+    "babel-eslint": "latest",
+    "babel-preset-es2015": "latest",
+    "docco": "github:67656e65726963/docco",
+    "eslint": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-config-airbnb-base": "latest",
+    "rollup": "latest",
+    "rollup-plugin-babel": "latest",
+    "rollup-plugin-node-resolve": "latest",
+    "tape": "latest",
+    "uglify-js": "latest"
+  },
+  "author": "sChzs BkgNns <sotirios.bakagiannis@gmail.com> (https://www.thewhodidthis.com)",
+  "license": "Unlicense"
+}
