@@ -17,7 +17,10 @@ export default {
     },
     {
       format: 'cjs',
-      dest: 'index.js'
+      dest: 'index.js',
+      external: [
+        '@thewhodidthis/otto'
+      ]
     }
   ]
 };
