@@ -8,16 +8,17 @@
 var myMod = function myMod(a, b) {
   return a - b * Math.floor(a / b);
 };
+var zeros = 1024 .toString(2).split('').slice(1).join('');
+var zerosMax = zeros.length;
 
 // Rule to binary convert
 var parseRule = function parseRule(rule) {
   // Base 2 digits
   var code = rule.toString(2);
+  var diff = Math.max(zerosMax, zerosMax - code.length);
 
   // Zero pad ruleset
-  var view = ('0000000000000000000000000000000' + code).substr(32 - code.length).split('').reverse();
-
-  return view;
+  return ('' + zeros + code).substr(diff).split('').reverse();
 };
 
 // Defaults
@@ -34,11 +35,11 @@ var data = {
   },
 
   // Index based lookup
-  stat: function stat(code, hood) {
-    var stats = parseInt(hood.join('').toString(2), 2);
-    var state = code[stats];
+  stat: function stat(hood, code) {
+    var flags = hood.join('').toString(2);
+    var stats = parseInt(flags, 2);
 
-    return state;
+    return code[stats];
   }
 };
 
@@ -55,41 +56,33 @@ var Otto = function Otto(opts) {
   var code = parseRule(rule);
 
   // Calculate state
-  var getState = function getState(v, i, view) {
-    // Collect neighbors
-    var hood = ends.map(function (diff) {
+  var step = function step(v, i, view) {
+    var hood = ends.map(function (span) {
       // The index for each neighbor cell
-      var site = myMod(diff + i, view.length);
+      var site = myMod(span + i, view.length);
 
       // The state of each neighbor
-      var flag = view[site];
-
-      return flag;
+      return view[site];
     });
 
-    return stat(code, hood, v);
+    return stat(hood, code, v);
   };
 
   // Clipboard, zero filled, need to work out adjustable size part
-  var next = new Uint8Array(size);
-
-  // Seed how on init
-  next = next.map(seed);
+  var grid = new Uint8Array(size);
+  var next = seed;
 
   return function () {
     // Update
-    var grid = next;
+    grid = grid.map(next);
+    next = step;
 
-    // Save for later
-    next = grid.map(getState);
-
-    // The memo
     return grid;
   };
 };
 
 // # Life
-// Just another game of life clone
+// Just another game of life runner
 
 var mySum = function mySum(a, b) {
   return a + b;
@@ -105,18 +98,18 @@ var Life = function Life(opts) {
     seed: function seed() {
       return Math.floor(Math.random() * 2) % 2;
     },
-    stat: function stat(code, hood, v) {
+    stat: function stat(hood, code, flag) {
       var stats = hood.reduce(mySum);
 
-      if ((stats <= 1 || stats >= 4) && v === 1) {
+      if ((stats <= 1 || stats >= 4) && flag === 1) {
         return 0;
       }
 
-      if (stats === 3 && v === 0) {
+      if (stats === 3 && flag === 0) {
         return 1;
       }
 
-      return v;
+      return flag;
     }
   }, opts, area);
 

@@ -1,5 +1,5 @@
 // # Life
-// Just another game of life clone
+// Just another game of life runner
 
 import Otto from '@thewhodidthis/otto';
 
@@ -11,18 +11,18 @@ const Life = (opts) => {
   const data = Object.assign({
     ends: mooreEnds(opts.size),
     seed: () => Math.floor(Math.random() * 2) % 2,
-    stat: (code, hood, v) => {
+    stat: (hood, code, flag) => {
       const stats = hood.reduce(mySum);
 
-      if ((stats <= 1 || stats >= 4) && v === 1) {
+      if ((stats <= 1 || stats >= 4) && flag === 1) {
         return 0;
       }
 
-      if (stats === 3 && v === 0) {
+      if (stats === 3 && flag === 0) {
         return 1;
       }
 
-      return v;
+      return flag;
     },
   }, opts, area);
 
