@@ -3,13 +3,13 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 
 export default {
   entry: 'index.es',
-  dest: 'dist/life.js',
-  format: 'iife',
-  indent: true,
-  sourceMap: true,
-  moduleName: 'Life',
   plugins: [
     babel(),
     nodeResolve(),
   ],
+  format: 'iife',
+  indent: true,
+  interop: false,
+  moduleName: 'Life',
+  dest: 'example/life.js',
 };
