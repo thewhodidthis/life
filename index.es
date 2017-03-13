@@ -14,11 +14,11 @@ const Life = (opts) => {
     stat: (hood, code, flag) => {
       const stats = hood.reduce(mySum);
 
-      if ((stats <= 1 || stats >= 4) && flag === 1) {
+      if (flag && (stats <= 1 || stats >= 4)) {
         return 0;
       }
 
-      if (stats === 3 && flag === 0) {
+      if (!flag && stats === 3) {
         return 1;
       }
 
