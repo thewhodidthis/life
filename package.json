@@ -24,7 +24,7 @@
     "remote": "thewhodidthis@zazie:www/example/otto/life"
   },
   "scripts": {
-    "pretest": "npm run build",
+    "pretest": "npm start",
     "test": "node test",
     "clear": "npm run clear:dist && npm run clear:logs",
     "clear:dist": "rm -rf dist/",
