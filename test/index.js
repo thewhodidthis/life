@@ -1,10 +1,11 @@
-'use strict';
-
 const test = require('tape');
 const Otto = require('../');
 
-// Compares with known integer sequence
-test('will compute', (t) => {
+test('will default', (t) => {
+  const otto = Otto();
+  const grid = otto();
+
+  t.ok(grid.length);
   t.end();
 });
 
