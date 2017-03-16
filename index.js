@@ -12,7 +12,9 @@ var mooreEnds = function mooreEnds(s) {
   return [-1, 1, -s, s, -1 - s, 1 - s, -1 + s, 1 + s];
 };
 
-var Life = function Life(opts) {
+var Life = function Life() {
+  var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { size: 1 };
+
   var area = { size: opts.size * opts.size };
   var data = Object.assign({
     ends: mooreEnds(opts.size),

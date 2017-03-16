@@ -6,7 +6,7 @@ import Otto from '@thewhodidthis/otto';
 const mySum = (a, b) => a + b;
 const mooreEnds = s => [-1, 1, -s, s, -1 - s, 1 - s, -1 + s, 1 + s];
 
-const Life = (opts) => {
+const Life = (opts = { size: 1 }) => {
   const area = { size: opts.size * opts.size };
   const data = Object.assign({
     ends: mooreEnds(opts.size),
