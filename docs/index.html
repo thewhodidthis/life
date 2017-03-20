@@ -35,12 +35,12 @@
 <span class="hljs-keyword">import</span> Otto <span class="hljs-keyword">from</span> <span class="hljs-string">'@thewhodidthis/otto'</span>;
 
 <span class="hljs-keyword">const</span> mySum = <span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a + b;
-<span class="hljs-keyword">const</span> mooreEnds = <span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> [<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, -s, s, <span class="hljs-number">-1</span> - s, <span class="hljs-number">1</span> - s, <span class="hljs-number">-1</span> + s, <span class="hljs-number">1</span> + s];
+<span class="hljs-keyword">const</span> mooreEnds = <span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> [<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, -n, n, <span class="hljs-number">-1</span> - n, <span class="hljs-number">1</span> - n, <span class="hljs-number">-1</span> + n, <span class="hljs-number">1</span> + n];
 
-<span class="hljs-keyword">const</span> Life = <span class="hljs-function">(<span class="hljs-params">opts = { size: <span class="hljs-number">1</span> }</span>) =&gt;</span> {
-  <span class="hljs-keyword">const</span> area = { <span class="hljs-attr">size</span>: opts.size * opts.size };
-  <span class="hljs-keyword">const</span> data = <span class="hljs-built_in">Object</span>.assign({
-    <span class="hljs-attr">ends</span>: mooreEnds(opts.size),
+<span class="hljs-keyword">const</span> Life = <span class="hljs-function">(<span class="hljs-params">data = { size: <span class="hljs-number">1</span> }</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> area = { <span class="hljs-attr">size</span>: data.size * data.size };
+  <span class="hljs-keyword">const</span> life = <span class="hljs-built_in">Object</span>.assign({
+    <span class="hljs-attr">ends</span>: mooreEnds(data.size),
     <span class="hljs-attr">seed</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">2</span>) % <span class="hljs-number">2</span>,
     <span class="hljs-attr">stat</span>: <span class="hljs-function">(<span class="hljs-params">hood, code, flag</span>) =&gt;</span> {
       <span class="hljs-keyword">const</span> stats = hood.reduce(mySum);
@@ -55,9 +55,9 @@
 
       <span class="hljs-keyword">return</span> flag;
     },
-  }, opts, area);
+  }, data, area);
 
-  <span class="hljs-keyword">return</span> Otto(data);
+  <span class="hljs-keyword">return</span> Otto(life);
 };
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Life;</pre></div></div>

@@ -8,16 +8,16 @@ var Otto = require('@thewhodidthis/otto');
 var mySum = function mySum(a, b) {
   return a + b;
 };
-var mooreEnds = function mooreEnds(s) {
-  return [-1, 1, -s, s, -1 - s, 1 - s, -1 + s, 1 + s];
+var mooreEnds = function mooreEnds(n) {
+  return [-1, 1, -n, n, -1 - n, 1 - n, -1 + n, 1 + n];
 };
 
 var Life = function Life() {
-  var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { size: 1 };
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { size: 1 };
 
-  var area = { size: opts.size * opts.size };
-  var data = Object.assign({
-    ends: mooreEnds(opts.size),
+  var area = { size: data.size * data.size };
+  var life = Object.assign({
+    ends: mooreEnds(data.size),
     seed: function seed() {
       return Math.floor(Math.random() * 2) % 2;
     },
@@ -34,9 +34,9 @@ var Life = function Life() {
 
       return flag;
     }
-  }, opts, area);
+  }, data, area);
 
-  return Otto(data);
+  return Otto(life);
 };
 
 module.exports = Life;

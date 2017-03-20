@@ -4,12 +4,12 @@
 import Otto from '@thewhodidthis/otto';
 
 const mySum = (a, b) => a + b;
-const mooreEnds = s => [-1, 1, -s, s, -1 - s, 1 - s, -1 + s, 1 + s];
+const mooreEnds = n => [-1, 1, -n, n, -1 - n, 1 - n, -1 + n, 1 + n];
 
-const Life = (opts = { size: 1 }) => {
-  const area = { size: opts.size * opts.size };
-  const data = Object.assign({
-    ends: mooreEnds(opts.size),
+const Life = (data = { size: 1 }) => {
+  const area = { size: data.size * data.size };
+  const life = Object.assign({
+    ends: mooreEnds(data.size),
     seed: () => Math.floor(Math.random() * 2) % 2,
     stat: (hood, code, flag) => {
       const stats = hood.reduce(mySum);
@@ -24,9 +24,9 @@ const Life = (opts = { size: 1 }) => {
 
       return flag;
     },
-  }, opts, area);
+  }, data, area);
 
-  return Otto(data);
+  return Otto(life);
 };
 
 export default Life;
