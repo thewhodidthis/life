@@ -1,46 +1,62 @@
 'use strict';
 
+var TAU =  2 * Math.PI;
+
 var html = document.documentElement;
-var plot = document.querySelector('canvas').getContext('2d');
+var list = document.getElementById('list');
 
-var size = plot.canvas.width;
-var life = Life({
-  size: size,
-});
+var cells = document.getElementsByTagName('input');
+var items = document.getElementsByTagName('li');
 
-var framesN = Math.pow(22, 22);
+var frank = cells[0];
+var jones = list.removeChild(items[0]);
+
+var framesN = Math.pow(23, 23);
 var frameId;
 
-var frame = function frame(r) {
-  var grid = life();
+var tots = 6;
+var size = 8;
 
-  for (var j = 0; j < grid.length; j += 1) {
-    var x = j % size;
-    var y = Math.floor(j / size);
+for (var i = 0, total = size * size; i < total - 1; i += 1) {
+  jones.appendChild(frank.cloneNode(true, true));
+}
 
-    if (grid[j]) {
-      plot.fillStyle = 'black';
-    } else {
-      plot.fillStyle = 'white';
+for (var i = 0, total = tots; i < total; i += 1) {
+  list.appendChild(jones.cloneNode(true, true));
+}
+
+var life = Life({
+  size: 24,
+});
+
+var frame = function frame(t) {
+  if (frameId % 20 === 0) {
+    var grid = life().slice(0, cells.length);
+
+    for (var c = 0; c < grid.length; c += 1) {
+      cells[c].checked = grid[c];
     }
-
-    plot.fillRect(x, y, 1, 1);
   }
 
-  if (frameId > framesN) {
+  frameId = window.requestAnimationFrame(frame);
+};
+
+if (window !== window.top) {
+  html.className = 'is-iframe';
+}
+
+document.addEventListener('click', function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  if (frameId) {
     frameId = window.cancelAnimationFrame(frameId);
   } else {
     frameId = window.requestAnimationFrame(frame);
   }
-};
+}, false);
 
-html.className = 'html';
-
-if (window !== window.top) {
-  html.className += ' is-iframe';
-}
-
-window.addEventListener('load', function(e) {
+window.addEventListener('load', function (e) {
   frameId = window.requestAnimationFrame(frame);
 }, false);
 

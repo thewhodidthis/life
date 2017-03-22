@@ -38,48 +38,25 @@ ul {
   height: 360px;
   overflow: hidden;
   list-style: none;
-  border: 1px solid #fff;
+  border: 1px solid #eee;
   border-width: 1px 0 0 1px;
 }
 
 li {
   float: left;
-  width: 179px;
-  height: 179px;
+  padding: 9px;
+  width: 180px;
+  height: 180px;
   display: block;
-  background: #ff0;
   position: relative;
-  border: 1px solid #fff;
+  box-sizing: border-box;
+  border: 1px solid #eee;
   border-width: 0 1px 1px 0;
 }
 
-li::after {
-  top: 50%;
-  left: 50%;
-  color: #fff;
-  z-index: 0;
-  cursor: pointer;
-  position: absolute;
-  display: inline-block;
-  content: attr(data-rule);
-  font: bold 2rem/1 sans-serif;
-  transform: translate(-50%, -50%) rotateZ(0);
-}
-
-li:only-child {
-  width: 100%;
-  height: 100%;
-  background: #000;
-}
-
-li:only-child canvas {
-  margin: 90px auto;
-}
-
-canvas {
-  z-index: 1;
-  display: block;
-  position: relative;
+input {
+  float: left;
+  margin: 3px 4px 4px 4px;
 }
 
 .is-iframe {
