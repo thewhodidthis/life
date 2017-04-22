@@ -7,6 +7,10 @@ noscript {
   font: italic 12px/28px arial, sans-serif;
 }
 
+body {
+  background: #eee;
+}
+
 body,
 p,
 figure {
@@ -16,8 +20,8 @@ figure {
 figure {
   top: 50%;
   width: 100%;
-  height: 360px;
-  margin-top: -180px;
+  height: 320px;
+  margin-top: -160px;
   position: absolute;
 }
 
@@ -34,24 +38,31 @@ figcaption p {
 ul {
   padding: 0;
   margin: auto;
-  width: 540px;
-  height: 360px;
+  width: 544px;
+  height: 323px;
   overflow: hidden;
   list-style: none;
-  border: 1px solid #eee;
-  border-width: 1px 0 0 1px;
+  border: 1px solid #fff;
 }
 
 li {
   float: left;
   padding: 9px;
   width: 180px;
-  height: 180px;
+  height: 160px;
   display: block;
+  border: inherit;
   position: relative;
+  margin: 0 1px 1px 0;
   box-sizing: border-box;
-  border: 1px solid #eee;
-  border-width: 0 1px 1px 0;
+}
+
+li:nth-of-type(3n+1) {
+  margin-left: 1px;
+}
+
+li:nth-of-type(-n+3) {
+  margin-top: 1px;
 }
 
 input {

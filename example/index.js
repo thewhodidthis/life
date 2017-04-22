@@ -16,25 +16,25 @@ var frameId;
 
 var tots = 6;
 var size = 8;
+var area = size * size;
+var most = area - (1 + size);
 
-for (var i = 0, total = size * size; i < total - 1; i += 1) {
+for (var i = 0; i < most; i += 1) {
   jones.appendChild(frank.cloneNode(true, true));
 }
 
-for (var i = 0, total = tots; i < total; i += 1) {
+for (var i = 0; i < tots; i += 1) {
   list.appendChild(jones.cloneNode(true, true));
 }
 
-var life = Life({
-  size: 24,
-});
+var life = Life({ size: 24 });
 
 var frame = function frame(t) {
   if (frameId % 20 === 0) {
-    var grid = life().slice(0, cells.length);
+    var grid = life().slice(0, (area * tots) - (size * tots));
 
-    for (var c = 0; c < grid.length; c += 1) {
-      cells[c].checked = grid[c];
+    for (var i = 0; i < grid.length; i += 1) {
+      cells[i].checked = grid[i];
     }
   }
 
