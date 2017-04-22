@@ -38,11 +38,10 @@ figcaption p {
 ul {
   padding: 0;
   margin: auto;
-  width: 544px;
-  height: 323px;
+  width: 540px;
+  height: 320px;
   overflow: hidden;
   list-style: none;
-  border: 1px solid #fff;
 }
 
 li {
@@ -53,7 +52,8 @@ li {
   display: block;
   border: inherit;
   position: relative;
-  margin: 0 1px 1px 0;
+  margin: 0 -1px -1px 0;
+  border: 1px solid #ddd;
   box-sizing: border-box;
 }
 
