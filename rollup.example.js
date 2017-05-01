@@ -8,7 +8,6 @@ export default {
     nodeResolve(),
   ],
   format: 'iife',
-  indent: true,
   interop: false,
   moduleName: 'Life',
   dest: 'example/life.js',
