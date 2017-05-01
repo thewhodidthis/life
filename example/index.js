@@ -54,9 +54,9 @@ document.addEventListener('click', function (e) {
   } else {
     frameId = window.requestAnimationFrame(frame);
   }
-}, false);
+});
 
 window.addEventListener('load', function (e) {
   frameId = window.requestAnimationFrame(frame);
-}, false);
+});
 
