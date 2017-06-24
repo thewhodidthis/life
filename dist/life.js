@@ -1,6 +1,5 @@
+var Life = (function (Otto) {
 'use strict';
-
-var Otto = require('@thewhodidthis/otto');
 
 // # Life
 // Just another game of life runner
@@ -39,4 +38,6 @@ var Life = function Life(data) {
   return Otto(life);
 };
 
-module.exports = Life;
+return Life;
+
+}(Otto));

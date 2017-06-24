@@ -6,10 +6,12 @@ import Otto from '@thewhodidthis/otto';
 const mySum = (a, b) => a + b;
 const mooreEnds = n => [-1, 1, -n, n, -1 - n, 1 - n, -1 + n, 1 + n];
 
-const Life = (data = { size: 1 }) => {
-  const area = { size: data.size * data.size };
+const Life = (data) => {
+  const size = (data && data.size) || 1;
+  const area = { size: size * size };
+
   const life = Object.assign({
-    ends: mooreEnds(data.size),
+    ends: mooreEnds(size),
     seed: () => Math.floor(Math.random() * 2) % 2,
     stat: (hood, code, flag) => {
       const stats = hood.reduce(mySum);
