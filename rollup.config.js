@@ -8,16 +8,12 @@ export default {
     babel(),
     nodeResolve(),
   ],
-  external: [
-    '@thewhodidthis/otto'
-  ],
   globals: {
     '@thewhodidthis/otto': 'Otto'
   },
   targets: [
     {
       format: 'iife',
-      sourceMap: true,
       moduleName: 'Life',
       dest: 'dist/life.js',
     },
