@@ -8,7 +8,7 @@ test('will fake new and default', (t) => {
 
   t.ok(grid.length, `grid size is ${grid.length} `);
   t.ok(mock.length, `mock size is ${mock.length} `);
-  t.equals(grid.length, mock.length, `grid size === mock size`);
+  t.equals(grid.length, mock.length, 'grid size === mock size');
   t.end();
 });
 
