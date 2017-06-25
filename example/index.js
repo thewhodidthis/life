@@ -25,7 +25,7 @@ var parseRule = function parseRule(rule) {
   return ('' + zeros + code).substr(diff).split('').reverse();
 };
 
-// Setup
+// Maker
 var Otto = function Otto(options) {
   // Merge options and defaults
   var settings = Object.assign({
