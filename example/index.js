@@ -94,7 +94,7 @@ var Life = function Life(data) {
   var size = data && data.size || 1;
   var area = { size: size * size };
 
-  var life = Object.assign({
+  var t0to = Object.assign({
     ends: mooreEnds(size),
     seed: function seed() {
       return Math.floor(Math.random() * 2) % 2;
@@ -114,17 +114,41 @@ var Life = function Life(data) {
     }
   }, data, area);
 
-  return Otto(life);
+  return Otto(t0to);
 };
 
 var plot = document.querySelector('canvas').getContext('2d');
-var plotSize = plot.canvas.width;
-var size = 50;
-var gridArea = 50 * 30;
+var plotW = plot.canvas.width;
+var plotH = plot.canvas.height;
+
+var cellSize = 10;
+var size = plotW / cellSize;
 
 var life = Life({ size: size });
 
 var frames = -1;
+
+// Draw gridlines
+var guides = plot.canvas.cloneNode().getContext('2d');
+
+for (var i = 0; i < plotW; i += 10) {
+  var x = i - 0.5;
+
+  guides.moveTo(x, 0);
+  guides.lineTo(x, plotH);
+}
+
+for (var _i = 0; _i < plotH; _i += 10) {
+  var y = _i - 0.5;
+
+  guides.moveTo(0, y);
+  guides.lineTo(plotW, y);
+}
+
+guides.fillStyle = 'transparent';
+guides.fillRect(0, 0, plotW, plotH);
+guides.strokeStyle = window.getComputedStyle(plot.canvas).borderColor;
+guides.stroke();
 
 var tick = function tick(fn) {
   return window.requestAnimationFrame(fn);
@@ -136,19 +160,21 @@ var draw = function draw() {
   if (frames % 15 === 0) {
     var grid = life();
 
-    for (var i = 0, total = gridArea; i < total; i += 1) {
-      var step = i * 10;
-      var x = step % plotSize;
-      var y = Math.floor(step / plotSize) * 10;
+    for (var _i2 = 0, total = grid.length; _i2 < total; _i2 += 1) {
+      var step = _i2 * cellSize;
+      var _x = step % plotW;
+      var _y = Math.floor(step / plotW) * cellSize;
 
-      if (grid[i]) {
+      if (grid[_i2]) {
         plot.fillStyle = 'black';
       } else {
         plot.fillStyle = 'white';
       }
 
-      plot.fillRect(x + 1, y + 1, 8, 8);
+      plot.fillRect(_x, _y, cellSize, cellSize);
     }
+
+    plot.drawImage(guides.canvas, 0, 0);
   }
 
   frames = tick(draw);
