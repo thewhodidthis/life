@@ -16,7 +16,7 @@ var Life = function Life(data) {
   var size = data && data.size || 1;
   var area = { size: size * size };
 
-  var life = Object.assign({
+  var t0to = Object.assign({
     ends: mooreEnds(size),
     seed: function seed() {
       return Math.floor(Math.random() * 2) % 2;
@@ -36,7 +36,7 @@ var Life = function Life(data) {
     }
   }, data, area);
 
-  return Otto(life);
+  return Otto(t0to);
 };
 
 module.exports = Life;

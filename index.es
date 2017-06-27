@@ -10,7 +10,7 @@ const Life = (data) => {
   const size = (data && data.size) || 1;
   const area = { size: size * size };
 
-  const life = Object.assign({
+  const t0to = Object.assign({
     ends: mooreEnds(size),
     seed: () => Math.floor(Math.random() * 2) % 2,
     stat: (hood, code, flag) => {
@@ -28,7 +28,7 @@ const Life = (data) => {
     },
   }, data, area);
 
-  return Otto(life);
+  return Otto(t0to);
 };
 
 export default Life;
