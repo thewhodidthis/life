@@ -4,4 +4,3 @@
 ```sh
 npm install thewhodidthis/life
 ```
-
