@@ -2,11 +2,6 @@
   "name": "@thewhodidthis/life",
   "version": "0.0.6",
   "description": "Otto life",
-  "keywords": [
-    "automata",
-    "cellular",
-    "conway"
-  ],
   "main": "index.js",
   "module": "index.es",
   "homepage": "https://github.com/thewhodidthis/life#readme",
@@ -17,20 +12,18 @@
   "bugs": {
     "url": "https://github.com/thewhodidthis/life/issues"
   },
-  "directories": {
-    "example": "example"
-  },
-  "config": {
-    "remote": "thewhodidthis@zazie:www/example/life"
-  },
   "scripts": {
+    "pretest": "eslint test.js",
     "test": "node test",
-    "lint": "eslint . example --ext .es test/*.js",
-    "start": "rollup -c -e @thewhodidthis/otto && uglifyjs dist/life.js -cmo dist/life.min.js",
-    "example": "npm run example:build && npm run example:serve",
-    "example:build": "rollup -c -i example/index.es -f iife -o example/index.js",
-    "example:serve": "php -S localhost:8000 -t example/",
-    "example:press": "rsync -avruzLPC --delete --exclude=.DS_Store ./example/ $npm_package_config_remote"
+    "prestart": "eslint index.es",
+    "start": "rollup -f cjs -e @thewhodidthis/otto index.es | buble > index.js",
+    "preexample": "eslint example/index.es",
+    "example": "cd example; rollup -c node:x -f iife index.es | buble > index.js",
+    "postexample": "open example/index.html",
+    "postpublish": "rsync -avruzLPC --del --exclude=.* ./example/ thewhodidthis@zazie:www/example/life/"
+  },
+  "eslintConfig": {
+    "extends": "@thewhodidthis"
   },
   "engines": {
     "node": ">=4.2.4",
@@ -40,17 +33,12 @@
     "@thewhodidthis/otto": "github:thewhodidthis/otto"
   },
   "devDependencies": {
-    "babel-eslint": "latest",
-    "babel-plugin-external-helpers": "latest",
-    "babel-preset-latest": "latest",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "latest",
-    "eslint-plugin-import": "latest",
+    "@thewhodidthis/eslint-config": "latest",
+    "buble": "latest",
+    "eslint": "latest",
     "rollup": "latest",
-    "rollup-plugin-babel": "latest",
-    "rollup-plugin-node-resolve": "latest",
-    "tape": "latest",
-    "uglify-js": "latest"
+    "rollup-config-x": "latest",
+    "tape": "latest"
   },
   "author": "sChzs BkgNns <sotirios.bakagiannis@gmail.com> (https://www.thewhodidthis.com)",
   "license": "Unlicense"
