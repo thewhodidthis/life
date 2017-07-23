@@ -30,7 +30,7 @@ for (let i = 0; i < plotH; i += 10) {
 
 guides.fillStyle = 'transparent'
 guides.fillRect(0, 0, plotW, plotH)
-guides.strokeStyle = window.getComputedStyle(plot.canvas).borderColor
+guides.strokeStyle = '#ddd'
 guides.stroke()
 
 const tick = fn => window.requestAnimationFrame(fn)

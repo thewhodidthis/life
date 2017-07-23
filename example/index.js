@@ -137,7 +137,7 @@ for (var i$1 = 0; i$1 < plotH; i$1 += 10) {
 
 guides.fillStyle = 'transparent';
 guides.fillRect(0, 0, plotW, plotH);
-guides.strokeStyle = window.getComputedStyle(plot.canvas).borderColor;
+guides.strokeStyle = '#ddd';
 guides.stroke();
 
 var tick = function (fn) { return window.requestAnimationFrame(fn); };
