@@ -1,3 +1,4 @@
+## Life
 > Just another game of life clone
 
 ### Setup
