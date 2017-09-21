@@ -1,4 +1,4 @@
-import Life from '../index.es'
+import Life from '../index.mjs'
 
 const plot = document.querySelector('canvas').getContext('2d')
 const plotW = plot.canvas.width
