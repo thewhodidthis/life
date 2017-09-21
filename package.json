@@ -3,7 +3,7 @@
   "version": "0.0.8",
   "description": "Otto life",
   "main": "index.js",
-  "module": "index.es",
+  "module": "index.mjs",
   "homepage": "https://github.com/thewhodidthis/life#readme",
   "repository": {
     "type": "git",
@@ -15,8 +15,8 @@
   "scripts": {
     "pretest": "eslint test.js",
     "test": "node test",
-    "prestart": "eslint index.es",
-    "start": "rollup -f cjs -e @thewhodidthis/otto index.es | buble > index.js",
+    "prestart": "eslint index.mjs",
+    "start": "rollup -f cjs -e @thewhodidthis/otto index.mjs | buble > index.js",
     "preexample": "eslint example/index.es",
     "example": "cd example; rollup -c node:x -f iife index.es | buble > index.js",
     "postexample": "open example/index.html"
