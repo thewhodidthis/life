@@ -1,4 +1,5 @@
 html {
+  background: #eee;
   font: 16px/1.25 arial, sans-serif;
 }
 
@@ -37,6 +38,7 @@ figure {
 
 figcaption {
   margin: 0.5rem;
+  max-width: calc(500px - 1rem)
 }
 
 canvas,
@@ -47,24 +49,3 @@ img {
 canvas {
   border: 1px solid #ddd;
 }
-
-.is-iframe {
-  overflow: hidden;
-}
-
-.is-iframe figure {
-  left: 0;
-  margin: 0;
-  top: 0;
-  width: 100%;
-}
-
-.is-iframe figcaption {
-  display: none;
-}
-
-.is-iframe canvas {
-  max-width: 100%;
-  width: 100%;
-}
-

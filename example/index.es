@@ -1,4 +1,4 @@
-import Life from '../index.mjs'
+import Life from '../'
 
 const plot = document.querySelector('canvas').getContext('2d')
 const plotW = plot.canvas.width
@@ -45,9 +45,9 @@ const draw = () => {
       const y = Math.floor(step / plotW) * cellSize
 
       if (grid[i]) {
-        plot.fillStyle = 'black'
+        plot.fillStyle = '#000'
       } else {
-        plot.fillStyle = 'white'
+        plot.fillStyle = '#eee'
       }
 
       plot.fillRect(x, y, cellSize, cellSize)
@@ -57,10 +57,6 @@ const draw = () => {
   }
 
   frames = tick(draw)
-}
-
-if (window !== window.top) {
-  document.documentElement.classList.add('is-iframe')
 }
 
 document.addEventListener('click', (e) => {

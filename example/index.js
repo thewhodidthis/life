@@ -152,9 +152,9 @@ var draw = function () {
       var y = Math.floor(step / plotW) * cellSize;
 
       if (grid[i]) {
-        plot.fillStyle = 'black';
+        plot.fillStyle = '#000';
       } else {
-        plot.fillStyle = 'white';
+        plot.fillStyle = '#eee';
       }
 
       plot.fillRect(x, y, cellSize, cellSize);
@@ -165,10 +165,6 @@ var draw = function () {
 
   frames = tick(draw);
 };
-
-if (window !== window.top) {
-  document.documentElement.classList.add('is-iframe');
-}
 
 document.addEventListener('click', function (e) {
   e.preventDefault();
