@@ -1,15 +1,11 @@
 'use strict'
 
 const test = require('tape')
-const Otto = require('./')
+const life = require('./')()
 
-test('will fake new and default', (t) => {
-  const otto = Otto()
-  const grid = otto()
-  const mock = new Otto()()
+test('will default', (t) => {
+  const grid = life()
 
-  t.ok(grid.length, `grid size is ${grid.length} `)
-  t.ok(mock.length, `mock size is ${mock.length} `)
-  t.equals(grid.length, mock.length, 'grid size === mock size')
+  t.ok(grid.length, `grid size is ${grid.length}`)
   t.end()
 })
