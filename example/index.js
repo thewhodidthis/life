@@ -23,8 +23,8 @@ var parseRule = function (rule) {
   return ("" + zeros + code).substr(diff).split('').reverse()
 };
 
-// Maker
-var Otto = function (data) {
+// Grid maker
+var otto = function (data) {
   // Merge options and defaults
   var t0to = Object.assign({
     size: 1,
@@ -82,7 +82,7 @@ var Otto = function (data) {
 var mySum = function (a, b) { return a + b; };
 var mooreEnds = function (n) { return [-1, 1, -n, n, -1 - n, 1 - n, -1 + n, 1 + n]; };
 
-var Life = function (data) {
+var life$1 = function (data) {
   var size = (data && data.size) || 1;
   var area = { size: size * size };
 
@@ -104,60 +104,61 @@ var Life = function (data) {
     }
   }, data, area);
 
-  return Otto(t0to)
+  return otto(t0to)
 };
 
 var plot = document.querySelector('canvas').getContext('2d');
-var plotW = plot.canvas.width;
-var plotH = plot.canvas.height;
+var ref = plot.canvas;
+var w = ref.width;
+var h = ref.height;
 
-var cellSize = 10;
-var size = plotW / cellSize;
-
-var life = Life({ size: size });
-
-var frames = -1;
+var size = 10;
+var grid = life$1({ size: w / size });
 
 // Draw gridlines
 var guides = plot.canvas.cloneNode().getContext('2d');
 
-for (var i = 0; i < plotW; i += 10) {
+for (var i = 0; i < w; i += 10) {
   var x = i - 0.5;
 
   guides.moveTo(x, 0);
-  guides.lineTo(x, plotH);
+  guides.lineTo(x, h);
 }
 
-for (var i$1 = 0; i$1 < plotH; i$1 += 10) {
+for (var i$1 = 0; i$1 < h; i$1 += 10) {
   var y = i$1 - 0.5;
 
   guides.moveTo(0, y);
-  guides.lineTo(plotW, y);
+  guides.lineTo(w, y);
 }
 
 guides.fillStyle = 'transparent';
-guides.fillRect(0, 0, plotW, plotH);
+guides.fillRect(0, 0, w, h);
 guides.strokeStyle = '#ddd';
 guides.stroke();
 
+var frames = -1;
+
 var tick = function (fn) { return window.requestAnimationFrame(fn); };
 var stop = function (id) { return window.cancelAnimationFrame(id); };
+
 var draw = function () {
   if (frames % 15 === 0) {
-    var grid = life();
+    var data = grid();
 
-    for (var i = 0, total = grid.length; i < total; i += 1) {
-      var step = i * cellSize;
-      var x = step % plotW;
-      var y = Math.floor(step / plotW) * cellSize;
+    for (var i = 0, total = data.length; i < total; i += 1) {
+      var step = i * size;
 
-      if (grid[i]) {
+      var x = step % w;
+      var y = size * Math.floor(step / w);
+
+      if (data[i]) {
         plot.fillStyle = '#000';
       } else {
         plot.fillStyle = '#eee';
       }
 
-      plot.fillRect(x, y, cellSize, cellSize);
+      plot.fillRect(x, y, size, size);
     }
 
     plot.drawImage(guides.canvas, 0, 0);
@@ -166,10 +167,11 @@ var draw = function () {
   frames = tick(draw);
 };
 
-document.addEventListener('click', function (e) {
-  e.preventDefault();
-  e.stopPropagation();
+if (window !== window.top) {
+  document.documentElement.className += ' is-iframe';
+}
 
+document.addEventListener('click', function () {
   frames = frames ? stop(frames) : tick(draw);
 });
 
