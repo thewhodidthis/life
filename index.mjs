@@ -1,12 +1,12 @@
 // # Life
 // Just another game of life runner
 
-import Otto from '@thewhodidthis/otto'
+import otto from '@thewhodidthis/otto'
 
 const mySum = (a, b) => a + b
 const mooreEnds = n => [-1, 1, -n, n, -1 - n, 1 - n, -1 + n, 1 + n]
 
-const Life = (data) => {
+const life = (data) => {
   const size = (data && data.size) || 1
   const area = { size: size * size }
 
@@ -28,7 +28,7 @@ const Life = (data) => {
     }
   }, data, area)
 
-  return Otto(t0to)
+  return otto(t0to)
 }
 
-export default Life
+export default life

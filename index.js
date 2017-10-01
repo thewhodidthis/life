@@ -2,7 +2,7 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var Otto = _interopDefault(require('@thewhodidthis/otto'));
+var otto = _interopDefault(require('@thewhodidthis/otto'));
 
 // # Life
 // Just another game of life runner
@@ -10,7 +10,7 @@ var Otto = _interopDefault(require('@thewhodidthis/otto'));
 var mySum = function (a, b) { return a + b; };
 var mooreEnds = function (n) { return [-1, 1, -n, n, -1 - n, 1 - n, -1 + n, 1 + n]; };
 
-var Life = function (data) {
+var life = function (data) {
   var size = (data && data.size) || 1;
   var area = { size: size * size };
 
@@ -32,8 +32,8 @@ var Life = function (data) {
     }
   }, data, area);
 
-  return Otto(t0to)
+  return otto(t0to)
 };
 
-module.exports = Life;
+module.exports = life;
 
