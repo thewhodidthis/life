@@ -6,11 +6,11 @@ import otto from '@thewhodidthis/otto'
 const mySum = (a, b) => a + b
 const mooreEnds = n => [-1, 1, -n, n, -1 - n, 1 - n, -1 + n, 1 + n]
 
-const life = (data) => {
-  const size = (data && data.size) || 1
-  const area = { size: size * size }
+const life = (from) => {
+  const size = (from && from.size) || 1
+  const grid = { size: size * size }
 
-  const t0to = Object.assign({
+  const data = Object.assign({
     ends: mooreEnds(size),
     seed: () => Math.floor(Math.random() * 2) % 2,
     stat: (hood, code, flag) => {
@@ -26,9 +26,9 @@ const life = (data) => {
 
       return flag
     }
-  }, data, area)
+  }, from, grid)
 
-  return otto(t0to)
+  return otto(data)
 }
 
 export default life
