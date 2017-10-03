@@ -37,8 +37,7 @@ figure {
 }
 
 figcaption {
-  margin: 0.5rem;
-  max-width: calc(500px - 1rem)
+  margin: 0.5rem 0 0;
 }
 
 canvas,
@@ -48,4 +47,12 @@ img {
 
 canvas {
   border: 1px solid #ddd;
+}
+
+.is-iframe {
+  overflow: hidden;
+}
+
+.is-iframe figcaption {
+  display: none;
 }
