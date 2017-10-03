@@ -4,8 +4,8 @@ const test = require('tape')
 const life = require('./')()
 
 test('will default', (t) => {
-  const grid = life()
+  const { length } = life()
 
-  t.ok(grid.length, `grid size is ${grid.length}`)
+  t.ok(length, `grid size is ${length}`)
   t.end()
 })
