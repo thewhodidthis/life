@@ -1,8 +1,6 @@
 'use strict';
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var otto = _interopDefault(require('@thewhodidthis/otto'));
+var otto = require('@thewhodidthis/otto');
 
 // # Life
 // Just another game of life runner
