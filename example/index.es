@@ -1,10 +1,10 @@
-import calculate from '../index.mjs'
+import life from '../index.mjs'
 
 const plot = document.querySelector('canvas').getContext('2d')
 const { width: w, height: h } = plot.canvas
 
 const size = 10
-const grid = calculate({ size: w / size })
+const grid = life({ size: w / size })
 
 // Draw gridlines
 const guides = plot.canvas.cloneNode().getContext('2d')

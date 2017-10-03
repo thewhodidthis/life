@@ -2,7 +2,7 @@
 'use strict';
 
 // # Otto
-// Helps deal CAs
+// Helps create elementary Cellular Automata
 
 // Wrap index round edges
 // http://stackoverflow.com/questions/1082917/mod-of-negative-number-is-melting-my-brain
@@ -23,10 +23,10 @@ var parseRule = function (rule) {
   return ("" + zeros + code).substr(diff).split('').reverse()
 };
 
-// Grid maker
+// Master grid maker
 var otto = function (data) {
   // Merge options and defaults
-  var t0to = Object.assign({
+  var papa = Object.assign({
     size: 1,
     rule: 30,
 
@@ -47,12 +47,12 @@ var otto = function (data) {
 
   // Rule 90 would be
   // ```['0', '1', '0', '1', '1', '0', '1']```
-  var code = parseRule(t0to.rule);
+  var code = parseRule(papa.rule);
 
   // Calculate state
   var step = function (v, i, view) {
     // Collect neighboring flags
-    var hood = t0to.ends.map(function (span) {
+    var hood = papa.ends.map(function (span) {
       // The index for each neighbor
       var site = myMod(span + i, view.length);
 
@@ -60,12 +60,12 @@ var otto = function (data) {
       return view[site]
     });
 
-    return t0to.stat(hood, code, v)
+    return papa.stat(hood, code, v)
   };
 
   // Clipboard, zero filled
-  var grid = new Uint8Array(t0to.size);
-  var next = t0to.seed;
+  var grid = new Uint8Array(papa.size);
+  var next = papa.seed;
 
   // Tick
   return function () {
@@ -82,11 +82,11 @@ var otto = function (data) {
 var mySum = function (a, b) { return a + b; };
 var mooreEnds = function (n) { return [-1, 1, -n, n, -1 - n, 1 - n, -1 + n, 1 + n]; };
 
-var life$1 = function (data) {
-  var size = (data && data.size) || 1;
-  var area = { size: size * size };
+var life = function (from) {
+  var size = (from && from.size) || 1;
+  var grid = { size: size * size };
 
-  var t0to = Object.assign({
+  var data = Object.assign({
     ends: mooreEnds(size),
     seed: function () { return Math.floor(Math.random() * 2) % 2; },
     stat: function (hood, code, flag) {
@@ -102,9 +102,9 @@ var life$1 = function (data) {
 
       return flag
     }
-  }, data, area);
+  }, from, grid);
 
-  return otto(t0to)
+  return otto(data)
 };
 
 var plot = document.querySelector('canvas').getContext('2d');
@@ -113,7 +113,7 @@ var w = ref.width;
 var h = ref.height;
 
 var size = 10;
-var grid = life$1({ size: w / size });
+var grid = life({ size: w / size });
 
 // Draw gridlines
 var guides = plot.canvas.cloneNode().getContext('2d');
