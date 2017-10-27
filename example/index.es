@@ -10,14 +10,14 @@ const grid = life({ size: w / size })
 const guides = plot.canvas.cloneNode().getContext('2d')
 
 for (let i = 0; i < w; i += 10) {
-  const x = i - 0.5
+  const x = i + 0.5
 
   guides.moveTo(x, 0)
   guides.lineTo(x, h)
 }
 
 for (let i = 0; i < h; i += 10) {
-  const y = i - 0.5
+  const y = i + 0.5
 
   guides.moveTo(0, y)
   guides.lineTo(w, y)

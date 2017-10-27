@@ -119,14 +119,14 @@ var grid = life({ size: w / size });
 var guides = plot.canvas.cloneNode().getContext('2d');
 
 for (var i = 0; i < w; i += 10) {
-  var x = i - 0.5;
+  var x = i + 0.5;
 
   guides.moveTo(x, 0);
   guides.lineTo(x, h);
 }
 
 for (var i$1 = 0; i$1 < h; i$1 += 10) {
-  var y = i$1 - 0.5;
+  var y = i$1 + 0.5;
 
   guides.moveTo(0, y);
   guides.lineTo(w, y);
