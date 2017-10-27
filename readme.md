@@ -1,7 +1,7 @@
-## Life
 > Just another game of life clone
 
 ### Setup
 ```sh
-npm install thewhodidthis/life
+# Fetch latest from github
+npm i thewhodidthis/life
 ```
