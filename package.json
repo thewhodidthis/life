@@ -37,7 +37,7 @@
     "eslint": "latest",
     "rollup": "latest",
     "rollup-config-x": "latest",
-    "tape": "latest"
+    "tapeless": "latest"
   },
   "author": "sChzs BkgNns <sotirios.bakagiannis@gmail.com> (https://www.thewhodidthis.com)",
   "license": "Unlicense"

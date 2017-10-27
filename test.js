@@ -1,11 +1,8 @@
 'use strict'
 
-const test = require('tape')
+const { ok } = require('tapeless')
 const life = require('./')()
 
-test('will default', (t) => {
-  const { length } = life()
+const { length } = life()
 
-  t.ok(length, `grid size is ${length}`)
-  t.end()
-})
+ok(length, `grid size is ${length}`, 'will default')
