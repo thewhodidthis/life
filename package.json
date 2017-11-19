@@ -39,6 +39,10 @@
     "rollup-config-x": "latest",
     "tapeless": "latest"
   },
+  "keyowrds": [
+    "cellular-automata",
+    "game-of-life"
+  ],
   "author": "sChzs BkgNns <sotirios.bakagiannis@gmail.com> (https://www.thewhodidthis.com)",
   "license": "Unlicense"
 }
