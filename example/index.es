@@ -44,9 +44,9 @@ const draw = () => {
       const y = size * Math.floor(step / w)
 
       if (data[i]) {
-        plot.fillStyle = '#000'
+        plot.fillStyle = 'black'
       } else {
-        plot.fillStyle = '#eee'
+        plot.fillStyle = 'white'
       }
 
       plot.fillRect(x, y, size, size)
