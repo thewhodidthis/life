@@ -29,7 +29,7 @@ p {
 
 figure {
   left: 50%;
-  margin: -150px 0 0 -250px;
+  margin: -180px 0 0 -320px;
   position: absolute;
   text-align: center;
   top: 50%;
@@ -39,14 +39,13 @@ figcaption {
   margin: 0.5rem 0 0;
 }
 
+canvas {
+  background: #000;
+}
+
 canvas,
 img {
   display: block;
-}
-
-canvas {
-  border: 1px solid #ddd;
-  border-width: 0 1px 1px 0;
 }
 
 .is-iframe {
