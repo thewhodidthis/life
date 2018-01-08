@@ -107,76 +107,78 @@ var life = function (from) {
   return otto(data)
 };
 
+if (window !== window.top) {
+  document.documentElement.classList.add('is-iframe');
+}
+
 var plot = document.querySelector('canvas').getContext('2d');
 var ref = plot.canvas;
 var w = ref.width;
-var h = ref.height;
 
-var size = 10;
-var grid = life({ size: w / size });
+var cellSize = 20;
+var gridSize = w / cellSize;
 
-// Draw gridlines
-var guides = plot.canvas.cloneNode().getContext('2d');
+var createCell = function () {
+  var cell = document.createElement('canvas').getContext('2d');
 
-for (var i = 0; i < w; i += 10) {
-  var x = i + 0.5;
+  cell.canvas.width = cell.canvas.height = cellSize;
 
-  guides.moveTo(x, 0);
-  guides.lineTo(x, h);
-}
+  cell.fillRect(0, 0, cellSize, cellSize);
 
-for (var i$1 = 0; i$1 < h; i$1 += 10) {
-  var y = i$1 + 0.5;
-
-  guides.moveTo(0, y);
-  guides.lineTo(w, y);
-}
-
-guides.fillStyle = 'transparent';
-guides.fillRect(0, 0, w, h);
-guides.strokeStyle = '#ddd';
-guides.stroke();
-
-var frames = -1;
-
-var tick = function (fn) { return window.requestAnimationFrame(fn); };
-var stop = function (id) { return window.cancelAnimationFrame(id); };
-
-var draw = function () {
-  if (frames % 15 === 0) {
-    var data = grid();
-
-    for (var i = 0, total = data.length; i < total; i += 1) {
-      var step = i * size;
-
-      var x = step % w;
-      var y = size * Math.floor(step / w);
-
-      if (data[i]) {
-        plot.fillStyle = 'black';
-      } else {
-        plot.fillStyle = 'white';
-      }
-
-      plot.fillRect(x, y, size, size);
-    }
-
-    plot.drawImage(guides.canvas, 0, 0);
-  }
-
-  frames = tick(draw);
+  return cell
 };
 
-if (window !== window.top) {
-  document.documentElement.className += ' is-iframe';
-}
+var mark = (function () {
+  var cell = createCell();
+  var edge = 5;
+  var span = cellSize - edge;
+
+  cell.strokeStyle = 'white';
+
+  cell.beginPath();
+  cell.moveTo(edge, edge);
+  cell.lineTo(span, span);
+  cell.moveTo(span, edge);
+  cell.lineTo(edge, span);
+  cell.stroke();
+
+  return plot.createPattern(cell.canvas, 'repeat')
+})();
+
+var hole = (function () {
+  var cell = createCell();
+
+  return plot.createPattern(cell.canvas, 'repeat')
+})();
+
+var beat = -1;
+var grid = life({ size: gridSize });
+
+var tick = function (fn) { return window.requestAnimationFrame(fn); };
+var draw = function () {
+  if (beat % 5 === 0) {
+    var data = grid();
+
+    for (var i = 0, stop = data.length; i < stop; i += 1) {
+      var step = i * cellSize;
+
+      var x = step % w;
+      var y = cellSize * Math.floor(step / w);
+
+      plot.fillStyle = data[i] ? hole : mark;
+      plot.fillRect(x, y, cellSize, cellSize);
+    }
+  }
+
+  beat = tick(draw);
+};
 
 document.addEventListener('click', function () {
-  frames = frames ? stop(frames) : tick(draw);
+  grid = life({ size: gridSize });
 });
 
 window.addEventListener('load', function () {
-  frames = tick(draw);
+  beat = tick(draw);
 });
 
 }());

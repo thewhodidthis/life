@@ -1,71 +1,74 @@
 import life from '../index.mjs'
 
+if (window !== window.top) {
+  document.documentElement.classList.add('is-iframe')
+}
+
 const plot = document.querySelector('canvas').getContext('2d')
-const { width: w, height: h } = plot.canvas
+const { width: w } = plot.canvas
 
-const size = 10
-const grid = life({ size: w / size })
+const cellSize = 20
+const gridSize = w / cellSize
 
-// Draw gridlines
-const guides = plot.canvas.cloneNode().getContext('2d')
+const createCell = () => {
+  const cell = document.createElement('canvas').getContext('2d')
 
-for (let i = 0; i < w; i += 10) {
-  const x = i + 0.5
+  cell.canvas.width = cell.canvas.height = cellSize
 
-  guides.moveTo(x, 0)
-  guides.lineTo(x, h)
+  cell.fillRect(0, 0, cellSize, cellSize)
+
+  return cell
 }
 
-for (let i = 0; i < h; i += 10) {
-  const y = i + 0.5
+const mark = (() => {
+  const cell = createCell()
+  const edge = 5
+  const span = cellSize - edge
 
-  guides.moveTo(0, y)
-  guides.lineTo(w, y)
-}
+  cell.strokeStyle = 'white'
 
-guides.fillStyle = 'transparent'
-guides.fillRect(0, 0, w, h)
-guides.strokeStyle = '#ddd'
-guides.stroke()
+  cell.beginPath()
+  cell.moveTo(edge, edge)
+  cell.lineTo(span, span)
+  cell.moveTo(span, edge)
+  cell.lineTo(edge, span)
+  cell.stroke()
 
-let frames = -1
+  return plot.createPattern(cell.canvas, 'repeat')
+})()
+
+const hole = (() => {
+  const cell = createCell()
+
+  return plot.createPattern(cell.canvas, 'repeat')
+})()
+
+let beat = -1
+let grid = life({ size: gridSize })
 
 const tick = fn => window.requestAnimationFrame(fn)
-const stop = id => window.cancelAnimationFrame(id)
-
 const draw = () => {
-  if (frames % 15 === 0) {
+  if (beat % 5 === 0) {
     const data = grid()
 
-    for (let i = 0, total = data.length; i < total; i += 1) {
-      const step = i * size
+    for (let i = 0, stop = data.length; i < stop; i += 1) {
+      const step = i * cellSize
 
       const x = step % w
-      const y = size * Math.floor(step / w)
+      const y = cellSize * Math.floor(step / w)
 
-      if (data[i]) {
-        plot.fillStyle = 'black'
-      } else {
-        plot.fillStyle = 'white'
-      }
-
-      plot.fillRect(x, y, size, size)
+      plot.fillStyle = data[i] ? hole : mark
+      plot.fillRect(x, y, cellSize, cellSize)
     }
-
-    plot.drawImage(guides.canvas, 0, 0)
   }
 
-  frames = tick(draw)
-}
-
-if (window !== window.top) {
-  document.documentElement.className += ' is-iframe'
+  beat = tick(draw)
 }
 
 document.addEventListener('click', () => {
-  frames = frames ? stop(frames) : tick(draw)
+  grid = life({ size: gridSize })
 })
 
 window.addEventListener('load', () => {
-  frames = tick(draw)
+  beat = tick(draw)
 })
