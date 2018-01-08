@@ -16,7 +16,7 @@
     "pretest": "eslint test.js",
     "test": "node test",
     "prestart": "eslint index.mjs",
-    "start": "rollup -f cjs -e @thewhodidthis/otto --no-interop index.mjs > index.js",
+    "start": "rollup -f cjs -e @thewhodidthis/otto --no-interop index.mjs | buble > index.js",
     "preexample": "eslint example/index.es",
     "example": "cd example; rollup -c node:x -f iife index.es | buble > index.js"
   },
@@ -40,6 +40,7 @@
   },
   "keyowrds": [
     "cellular-automata",
+    "conway",
     "game-of-life"
   ],
   "author": "sChzs BkgNns <sotirios.bakagiannis@gmail.com> (https://www.thewhodidthis.com)",

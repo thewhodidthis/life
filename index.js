@@ -5,18 +5,18 @@ var otto = require('@thewhodidthis/otto');
 // # Life
 // Just another game of life runner
 
-const mySum = (a, b) => a + b;
-const mooreEnds = n => [-1, 1, -n, n, -1 - n, 1 - n, -1 + n, 1 + n];
+var mySum = function (a, b) { return a + b; };
+var mooreEnds = function (n) { return [-1, 1, -n, n, -1 - n, 1 - n, -1 + n, 1 + n]; };
 
-const life = (from) => {
-  const size = (from && from.size) || 1;
-  const grid = { size: size * size };
+var life = function (from) {
+  var size = (from && from.size) || 1;
+  var grid = { size: size * size };
 
-  const data = Object.assign({
+  var data = Object.assign({
     ends: mooreEnds(size),
-    seed: () => Math.floor(Math.random() * 2) % 2,
-    stat: (hood, code, flag) => {
-      const stats = hood.reduce(mySum);
+    seed: function () { return Math.floor(Math.random() * 2) % 2; },
+    stat: function (hood, code, flag) {
+      var stats = hood.reduce(mySum);
 
       if (flag && (stats <= 1 || stats >= 4)) {
         return 0
@@ -34,3 +34,4 @@ const life = (from) => {
 };
 
 module.exports = life;
+
