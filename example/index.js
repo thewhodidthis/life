@@ -118,38 +118,24 @@ var w = ref.width;
 var cellSize = 20;
 var gridSize = w / cellSize;
 
-var createCell = function () {
-  var cell = document.createElement('canvas').getContext('2d');
+var cell = document.createElement('canvas').getContext('2d');
 
-  cell.canvas.width = cell.canvas.height = cellSize;
+cell.canvas.width = cell.canvas.height = cellSize;
 
-  cell.fillRect(0, 0, cellSize, cellSize);
+var edge = 5;
+var span = cellSize - edge;
 
-  return cell
-};
+cell.strokeStyle = 'white';
 
-var mark = (function () {
-  var cell = createCell();
-  var edge = 5;
-  var span = cellSize - edge;
+cell.fillRect(0, 0, cellSize, cellSize);
+cell.beginPath();
+cell.moveTo(edge, edge);
+cell.lineTo(span, span);
+cell.moveTo(span, edge);
+cell.lineTo(edge, span);
+cell.stroke();
 
-  cell.strokeStyle = 'white';
-
-  cell.beginPath();
-  cell.moveTo(edge, edge);
-  cell.lineTo(span, span);
-  cell.moveTo(span, edge);
-  cell.lineTo(edge, span);
-  cell.stroke();
-
-  return plot.createPattern(cell.canvas, 'repeat')
-})();
-
-var hole = (function () {
-  var cell = createCell();
-
-  return plot.createPattern(cell.canvas, 'repeat')
-})();
+var mark = plot.createPattern(cell.canvas, 'repeat');
 
 var beat = -1;
 var grid = life({ size: gridSize });
@@ -165,7 +151,7 @@ var draw = function () {
       var x = step % w;
       var y = cellSize * Math.floor(step / w);
 
-      plot.fillStyle = data[i] ? hole : mark;
+      plot.fillStyle = data[i] ? '#000' : mark;
       plot.fillRect(x, y, cellSize, cellSize);
     }
   }

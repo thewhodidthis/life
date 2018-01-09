@@ -10,38 +10,24 @@ const { width: w } = plot.canvas
 const cellSize = 20
 const gridSize = w / cellSize
 
-const createCell = () => {
-  const cell = document.createElement('canvas').getContext('2d')
+const cell = document.createElement('canvas').getContext('2d')
 
-  cell.canvas.width = cell.canvas.height = cellSize
+cell.canvas.width = cell.canvas.height = cellSize
 
-  cell.fillRect(0, 0, cellSize, cellSize)
+const edge = 5
+const span = cellSize - edge
 
-  return cell
-}
+cell.strokeStyle = 'white'
 
-const mark = (() => {
-  const cell = createCell()
-  const edge = 5
-  const span = cellSize - edge
+cell.fillRect(0, 0, cellSize, cellSize)
+cell.beginPath()
+cell.moveTo(edge, edge)
+cell.lineTo(span, span)
+cell.moveTo(span, edge)
+cell.lineTo(edge, span)
+cell.stroke()
 
-  cell.strokeStyle = 'white'
-
-  cell.beginPath()
-  cell.moveTo(edge, edge)
-  cell.lineTo(span, span)
-  cell.moveTo(span, edge)
-  cell.lineTo(edge, span)
-  cell.stroke()
-
-  return plot.createPattern(cell.canvas, 'repeat')
-})()
-
-const hole = (() => {
-  const cell = createCell()
-
-  return plot.createPattern(cell.canvas, 'repeat')
-})()
+const mark = plot.createPattern(cell.canvas, 'repeat')
 
 let beat = -1
 let grid = life({ size: gridSize })
@@ -57,7 +43,7 @@ const draw = () => {
       const x = step % w
       const y = cellSize * Math.floor(step / w)
 
-      plot.fillStyle = data[i] ? hole : mark
+      plot.fillStyle = data[i] ? '#000' : mark
       plot.fillRect(x, y, cellSize, cellSize)
     }
   }
