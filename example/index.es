@@ -10,24 +10,26 @@ const { width: w } = plot.canvas
 const cellSize = 20
 const gridSize = w / cellSize
 
-const cell = document.createElement('canvas').getContext('2d')
+const mark = (() => {
+  const cell = document.createElement('canvas').getContext('2d')
+  const edge = 5
+  const span = cellSize - edge
 
-cell.canvas.width = cell.canvas.height = cellSize
+  cell.canvas.width = cell.canvas.height = cellSize
 
-const edge = 5
-const span = cellSize - edge
+  cell.fillRect(0, 0, cellSize, cellSize)
 
-cell.strokeStyle = 'white'
+  cell.beginPath()
+  cell.moveTo(edge, edge)
+  cell.lineTo(span, span)
+  cell.moveTo(span, edge)
+  cell.lineTo(edge, span)
 
-cell.fillRect(0, 0, cellSize, cellSize)
-cell.beginPath()
-cell.moveTo(edge, edge)
-cell.lineTo(span, span)
-cell.moveTo(span, edge)
-cell.lineTo(edge, span)
-cell.stroke()
+  cell.strokeStyle = 'white'
+  cell.stroke()
 
-const mark = plot.createPattern(cell.canvas, 'repeat')
+  return plot.createPattern(cell.canvas, 'repeat')
+})()
 
 let beat = -1
 let grid = life({ size: gridSize })

@@ -118,24 +118,26 @@ var w = ref.width;
 var cellSize = 20;
 var gridSize = w / cellSize;
 
-var cell = document.createElement('canvas').getContext('2d');
+var mark = (function () {
+  var cell = document.createElement('canvas').getContext('2d');
+  var edge = 5;
+  var span = cellSize - edge;
 
-cell.canvas.width = cell.canvas.height = cellSize;
+  cell.canvas.width = cell.canvas.height = cellSize;
 
-var edge = 5;
-var span = cellSize - edge;
+  cell.fillRect(0, 0, cellSize, cellSize);
 
-cell.strokeStyle = 'white';
+  cell.beginPath();
+  cell.moveTo(edge, edge);
+  cell.lineTo(span, span);
+  cell.moveTo(span, edge);
+  cell.lineTo(edge, span);
 
-cell.fillRect(0, 0, cellSize, cellSize);
-cell.beginPath();
-cell.moveTo(edge, edge);
-cell.lineTo(span, span);
-cell.moveTo(span, edge);
-cell.lineTo(edge, span);
-cell.stroke();
+  cell.strokeStyle = 'white';
+  cell.stroke();
 
-var mark = plot.createPattern(cell.canvas, 'repeat');
+  return plot.createPattern(cell.canvas, 'repeat')
+})();
 
 var beat = -1;
 var grid = life({ size: gridSize });
