@@ -7,19 +7,19 @@ if (window !== window.top) {
 const plot = document.querySelector('canvas').getContext('2d')
 const { width: w } = plot.canvas
 
-const cellSize = 20
-const gridSize = w / cellSize
+const step = 20
+const seed = { size: w / step }
 
 const mark = (() => {
   const cell = document.createElement('canvas').getContext('2d')
-  const edge = 5
-  const span = cellSize - edge
+  const edge = 6
+  const span = step - edge
 
-  cell.canvas.width = cell.canvas.height = cellSize
+  cell.canvas.width = cell.canvas.height = step
 
-  cell.fillRect(0, 0, cellSize, cellSize)
-
+  cell.fillRect(0, 0, step, step)
   cell.beginPath()
+
   cell.moveTo(edge, edge)
   cell.lineTo(span, span)
   cell.moveTo(span, edge)
@@ -32,7 +32,7 @@ const mark = (() => {
 })()
 
 let beat = -1
-let grid = life({ size: gridSize })
+let grid = life(seed)
 
 const tick = fn => window.requestAnimationFrame(fn)
 const draw = () => {
@@ -40,13 +40,13 @@ const draw = () => {
     const data = grid()
 
     for (let i = 0, stop = data.length; i < stop; i += 1) {
-      const step = i * cellSize
+      const s = i * step
 
-      const x = step % w
-      const y = cellSize * Math.floor(step / w)
+      const x = s % w
+      const y = step * Math.floor(s / w)
 
       plot.fillStyle = data[i] ? '#000' : mark
-      plot.fillRect(x, y, cellSize, cellSize)
+      plot.fillRect(x, y, step, step)
     }
   }
 
@@ -54,7 +54,7 @@ const draw = () => {
 }
 
 document.addEventListener('click', () => {
-  grid = life({ size: gridSize })
+  grid = life(seed)
 })
 
 window.addEventListener('load', () => {

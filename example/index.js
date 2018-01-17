@@ -115,19 +115,19 @@ var plot = document.querySelector('canvas').getContext('2d');
 var ref = plot.canvas;
 var w = ref.width;
 
-var cellSize = 20;
-var gridSize = w / cellSize;
+var step = 20;
+var seed = { size: w / step };
 
 var mark = (function () {
   var cell = document.createElement('canvas').getContext('2d');
-  var edge = 5;
-  var span = cellSize - edge;
+  var edge = 6;
+  var span = step - edge;
 
-  cell.canvas.width = cell.canvas.height = cellSize;
+  cell.canvas.width = cell.canvas.height = step;
 
-  cell.fillRect(0, 0, cellSize, cellSize);
-
+  cell.fillRect(0, 0, step, step);
   cell.beginPath();
+
   cell.moveTo(edge, edge);
   cell.lineTo(span, span);
   cell.moveTo(span, edge);
@@ -140,7 +140,7 @@ var mark = (function () {
 })();
 
 var beat = -1;
-var grid = life({ size: gridSize });
+var grid = life(seed);
 
 var tick = function (fn) { return window.requestAnimationFrame(fn); };
 var draw = function () {
@@ -148,13 +148,13 @@ var draw = function () {
     var data = grid();
 
     for (var i = 0, stop = data.length; i < stop; i += 1) {
-      var step = i * cellSize;
+      var s = i * step;
 
-      var x = step % w;
-      var y = cellSize * Math.floor(step / w);
+      var x = s % w;
+      var y = step * Math.floor(s / w);
 
       plot.fillStyle = data[i] ? '#000' : mark;
-      plot.fillRect(x, y, cellSize, cellSize);
+      plot.fillRect(x, y, step, step);
     }
   }
 
@@ -162,7 +162,7 @@ var draw = function () {
 };
 
 document.addEventListener('click', function () {
-  grid = life({ size: gridSize });
+  grid = life(seed);
 });
 
 window.addEventListener('load', function () {
