@@ -10,26 +10,25 @@ const { width: w } = plot.canvas
 const step = 20
 const seed = { size: w / step }
 
-const mark = (() => {
-  const cell = document.createElement('canvas').getContext('2d')
-  const edge = 6
-  const span = step - edge
+const cell = document.createElement('canvas').getContext('2d')
 
-  cell.canvas.width = cell.canvas.height = step
+const edge = 6
+const span = step - edge
 
-  cell.fillRect(0, 0, step, step)
-  cell.beginPath()
+cell.canvas.width = cell.canvas.height = step
 
-  cell.moveTo(edge, edge)
-  cell.lineTo(span, span)
-  cell.moveTo(span, edge)
-  cell.lineTo(edge, span)
+cell.fillRect(0, 0, step, step)
+cell.beginPath()
 
-  cell.strokeStyle = 'white'
-  cell.stroke()
+cell.moveTo(edge, edge)
+cell.lineTo(span, span)
+cell.moveTo(span, edge)
+cell.lineTo(edge, span)
 
-  return plot.createPattern(cell.canvas, 'repeat')
-})()
+cell.strokeStyle = 'white'
+cell.stroke()
+
+const mark = plot.createPattern(cell.canvas, 'repeat')
 
 let beat = -1
 let grid = life(seed)

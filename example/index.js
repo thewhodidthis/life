@@ -118,26 +118,25 @@ var w = ref.width;
 var step = 20;
 var seed = { size: w / step };
 
-var mark = (function () {
-  var cell = document.createElement('canvas').getContext('2d');
-  var edge = 6;
-  var span = step - edge;
+var cell = document.createElement('canvas').getContext('2d');
 
-  cell.canvas.width = cell.canvas.height = step;
+var edge = 6;
+var span = step - edge;
 
-  cell.fillRect(0, 0, step, step);
-  cell.beginPath();
+cell.canvas.width = cell.canvas.height = step;
 
-  cell.moveTo(edge, edge);
-  cell.lineTo(span, span);
-  cell.moveTo(span, edge);
-  cell.lineTo(edge, span);
+cell.fillRect(0, 0, step, step);
+cell.beginPath();
 
-  cell.strokeStyle = 'white';
-  cell.stroke();
+cell.moveTo(edge, edge);
+cell.lineTo(span, span);
+cell.moveTo(span, edge);
+cell.lineTo(edge, span);
 
-  return plot.createPattern(cell.canvas, 'repeat')
-})();
+cell.strokeStyle = 'white';
+cell.stroke();
+
+var mark = plot.createPattern(cell.canvas, 'repeat');
 
 var beat = -1;
 var grid = life(seed);
