@@ -133,6 +133,7 @@ cell.lineTo(span, span);
 cell.moveTo(span, edge);
 cell.lineTo(edge, span);
 
+cell.lineWidth = 2;
 cell.strokeStyle = 'white';
 cell.stroke();
 
