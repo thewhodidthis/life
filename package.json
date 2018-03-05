@@ -16,23 +16,22 @@
     "pretest": "eslint test.js",
     "test": "node test",
     "prestart": "eslint index.mjs",
-    "start": "rollup -f cjs -e @thewhodidthis/otto --no-interop index.mjs | buble > index.js",
-    "preexample": "eslint example/index.es",
-    "example": "cd example; rollup -c node:x -f iife index.es | buble > index.js"
+    "start": "rollup -f cjs -e @thewhodidthis/otto --no-interop index.mjs > index.js",
+    "preexample": "eslint example/index.js",
+    "example": "cd example; rollup -c node:x -f iife index.js > bundle.js"
   },
   "eslintConfig": {
     "extends": "@thewhodidthis"
   },
   "engines": {
-    "node": ">=6.4.0",
-    "npm": ">=3.10.3"
+    "node": ">=6.11.0",
+    "npm": ">=3.10.10"
   },
   "dependencies": {
     "@thewhodidthis/otto": "github:thewhodidthis/otto"
   },
   "devDependencies": {
     "@thewhodidthis/eslint-config": "latest",
-    "buble": "latest",
     "eslint": "latest",
     "rollup": "latest",
     "rollup-config-x": "latest",
