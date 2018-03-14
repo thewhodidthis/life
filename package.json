@@ -1,6 +1,6 @@
 {
   "name": "@thewhodidthis/life",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Just another game of life runner",
   "main": "index",
   "module": "index.mjs",
