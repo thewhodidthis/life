@@ -16,7 +16,7 @@
     "pretest": "eslint test.js",
     "test": "node test",
     "prestart": "eslint index.mjs",
-    "start": "rollup -f cjs -e @thewhodidthis/otto --no-interop index.mjs > index.js",
+    "start": "rollup -c node:x -f cjs -e @thewhodidthis/otto --no-interop --environment PREFER_CONST index.mjs > index.js",
     "preexample": "eslint example/index.js",
     "example": "cd example; rollup -c node:x -f iife index.js > bundle.js"
   },
