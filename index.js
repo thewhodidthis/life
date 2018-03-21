@@ -1,6 +1,6 @@
 'use strict';
 
-var otto = require('@thewhodidthis/otto');
+const otto = require('@thewhodidthis/otto');
 
 // # Life
 
