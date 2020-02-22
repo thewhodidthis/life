@@ -2,46 +2,49 @@
   "name": "@thewhodidthis/life",
   "version": "1.0.6",
   "description": "Just another game of life runner",
-  "main": "index",
-  "module": "index.mjs",
   "homepage": "https://github.com/thewhodidthis/life#readme",
+  "bugs": {
+    "url": "https://github.com/thewhodidthis/life/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/thewhodidthis/life.git"
   },
-  "bugs": {
-    "url": "https://github.com/thewhodidthis/life/issues"
+  "license": "ISC",
+  "author": "Sotiri Bakagiannis <sotirios.bakagiannis@gmail.com> (http://thewhodidthis.com)",
+  "main": "index",
+  "module": "index.mjs",
+  "directories": {
+    "example": "example"
   },
   "scripts": {
-    "pretest": "eslint test.js",
-    "test": "node test",
-    "prestart": "eslint index.mjs",
-    "start": "rollup -c node:x -f cjs -e @thewhodidthis/otto --no-interop --environment PREFER_CONST index.mjs > index.js",
     "preexample": "eslint example/index.js",
-    "example": "cd example; rollup -c node:x -f iife index.js > bundle.js"
+    "example": "cd example; rollup -c node:x -f iife -o bundle.js index.js",
+    "prestart": "eslint index.mjs",
+    "start": "rollup -c node:x -f cjs -e @thewhodidthis/otto -o index.js index.mjs --no-interop --preferConst",
+    "pretest": "eslint test.js",
+    "test": "node test"
   },
   "eslintConfig": {
     "extends": "@thewhodidthis"
+  },
+  "dependencies": {
+    "@thewhodidthis/otto": "^1.0.5"
+  },
+  "devDependencies": {
+    "@thewhodidthis/eslint-config": "^0.0.18",
+    "eslint": "^6.8.0",
+    "rollup": "^1.31.1",
+    "rollup-config-x": "^1.0.5",
+    "tapeless": "^0.0.10"
   },
   "engines": {
     "node": ">=6.11.0",
     "npm": ">=3.10.10"
   },
-  "dependencies": {
-    "@thewhodidthis/otto": "github:thewhodidthis/otto"
-  },
-  "devDependencies": {
-    "@thewhodidthis/eslint-config": "latest",
-    "eslint": "latest",
-    "rollup": "latest",
-    "rollup-config-x": "latest",
-    "tapeless": "latest"
-  },
   "keyowrds": [
     "cellular-automata",
     "conway",
     "game-of-life"
-  ],
-  "author": "sChzs BkgNns <sotirios.bakagiannis@gmail.com> (https://www.thewhodidthis.com)",
-  "license": "Unlicense"
+  ]
 }
