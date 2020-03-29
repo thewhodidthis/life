@@ -29,7 +29,7 @@
     "extends": "@thewhodidthis"
   },
   "dependencies": {
-    "@thewhodidthis/otto": "^1.0.5"
+    "@thewhodidthis/otto": "^1.0.6"
   },
   "devDependencies": {
     "@thewhodidthis/eslint-config": "^0.0.18",
