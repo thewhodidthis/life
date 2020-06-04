@@ -1,10 +1,10 @@
 ## about
 
-Just another game of life clone.
+Just another [Game of Life](https://en.wikipedia.org/wiki/The_Game_of_Life) clone.
 
 ## setup
 
-Fetch latest from GitHub,
+Fetch latest from GitHub directly:
 
 ```sh
 npm i thewhodidthis/life
