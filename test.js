@@ -1,10 +1,11 @@
-'use strict'
+import { assert, report } from "tapeless"
+import life from "./main.js"
 
-const { ok } = require('tapeless')
-const life = require('./')()
-
-const { length } = life()
+const { ok } = assert
+const { length } = life()()
 
 ok
-  .describe(`grid size is ${length}`, 'will default')
+  .describe(`grid size is ${length}`, "will default")
   .test(length)
+
+report()
