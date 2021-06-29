@@ -3,6 +3,11 @@
   "version": "1.0.7",
   "private": true,
   "description": "Just another game of life runner",
+  "keyowrds": [
+    "cellular-automata",
+    "conway",
+    "game-of-life"
+  ],
   "homepage": "https://github.com/thewhodidthis/life#readme",
   "bugs": {
     "url": "https://github.com/thewhodidthis/life/issues"
@@ -13,39 +18,25 @@
   },
   "license": "ISC",
   "author": "Sotiri Bakagiannis <sotirios.bakagiannis@gmail.com> (http://thewhodidthis.com)",
-  "main": "index",
-  "module": "index.mjs",
+  "type": "module",
+  "exports": "./main.js",
+  "main": "./main.js",
   "directories": {
     "example": "example"
   },
   "scripts": {
-    "preexample": "eslint example/index.js",
-    "example": "cd example; rollup -c node:x -f iife -o bundle.js index.js",
-    "prestart": "eslint index.mjs",
-    "start": "rollup -c node:x -f cjs -e @thewhodidthis/otto -o index.js index.mjs --no-interop --preferConst",
-    "pretest": "eslint test.js",
-    "test": "node test"
-  },
-  "eslintConfig": {
-    "extends": "@thewhodidthis"
+    "start": "cd example; esbuild --bundle --outfile=bundle.js index.js",
+    "test": "node test.js"
   },
   "dependencies": {
-    "@thewhodidthis/otto": "^1.0.6"
+    "@thewhodidthis/otto": "^2.0.0"
   },
   "devDependencies": {
-    "@thewhodidthis/eslint-config": "^0.0.18",
-    "eslint": "^6.8.0",
-    "rollup": "^1.31.1",
-    "rollup-config-x": "^1.0.5",
-    "tapeless": "^0.0.10"
+    "esbuild": "^0.12.12",
+    "tapeless": "^2.0.1"
   },
   "engines": {
-    "node": ">=6.11.0",
-    "npm": ">=3.10.10"
-  },
-  "keyowrds": [
-    "cellular-automata",
-    "conway",
-    "game-of-life"
-  ]
+    "node": ">=14.17.0",
+    "npm": ">=6.14.13"
+  }
 }
