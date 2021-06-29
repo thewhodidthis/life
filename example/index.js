@@ -1,16 +1,16 @@
-import life from '../index.mjs'
+import life from "../main.js"
 
 if (window !== window.top) {
-  document.documentElement.classList.add('is-iframe')
+  document.documentElement.classList.add("is-iframe")
 }
 
-const plot = document.querySelector('canvas').getContext('2d')
+const plot = document.querySelector("canvas").getContext("2d")
 const { width: w } = plot.canvas
 
 const step = 20
 const seed = { size: w / step }
 
-const cell = document.createElement('canvas').getContext('2d')
+const cell = document.createElement("canvas").getContext("2d")
 
 const edge = 6
 const span = step - edge
@@ -26,10 +26,10 @@ cell.moveTo(span, edge)
 cell.lineTo(edge, span)
 
 cell.lineWidth = 2
-cell.strokeStyle = 'white'
+cell.strokeStyle = "white"
 cell.stroke()
 
-const mark = plot.createPattern(cell.canvas, 'repeat')
+const mark = plot.createPattern(cell.canvas, "repeat")
 
 let beat = -1
 let grid = life(seed)
@@ -45,7 +45,7 @@ const draw = () => {
       const x = s % w
       const y = step * Math.floor(s / w)
 
-      plot.fillStyle = data[i] ? '#000' : mark
+      plot.fillStyle = data[i] ? "#000" : mark
       plot.fillRect(x, y, step, step)
     }
   }
@@ -53,10 +53,10 @@ const draw = () => {
   beat = tick(draw)
 }
 
-document.addEventListener('click', () => {
+document.addEventListener("click", () => {
   grid = life(seed)
 })
 
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
   beat = tick(draw)
 })
