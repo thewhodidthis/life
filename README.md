@@ -4,10 +4,11 @@ Just another [Game of Life](https://en.wikipedia.org/wiki/The_Game_of_Life) clon
 
 ## setup
 
-Fetch latest from GitHub directly:
+Download from GitHub directly:
 
 ```sh
-npm i thewhodidthis/life
+# Add to package.json
+npm install thewhodidthis/life
 ```
 
 ## see also
